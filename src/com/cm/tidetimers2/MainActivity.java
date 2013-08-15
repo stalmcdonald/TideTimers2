@@ -57,6 +57,8 @@ public class MainActivity extends Activity {
 	  
 	   }
 	   
+	   /*  STILL NOT SURE WHY MY NEW KEY I GENERATED STILL WONT PULL DATA. */
+	   
 	 //pulling city tide prediction from the wunderground api
 	 //string reference URL
 	 //JSON Path Example: http://api.wunderground.com/api/d4509f6df6f598a0/tide/q/Seattle.json
@@ -96,7 +98,7 @@ public class MainActivity extends Activity {
 	     	return history;
 	     }
 	     
-	     private class LocRequest extends AsyncTask<URL,Void,String>{
+	     public class LocRequest extends AsyncTask<URL,Void,String>{
 	     	//override 2 separate functions
 	     	@Override
 	     	protected String doInBackground(URL...urls){
@@ -111,10 +113,7 @@ public class MainActivity extends Activity {
 	     	@Override
 	     	protected void onPostExecute(String result){
 	     		Log.d("URL RESPONSE",result);
-	     		//Still working on Parsing Data, decided to go back to AsyncTask and do without xml layout until I can work out the rest of the kinks one by one.  
-	     		//Running out of time hopefully I will be able to fix a few requirements by tonight.
-	     		//Receiving a JSON error JSON OBJECT EXCEPTION org.json.JSONException: End of input at character 0 of not really sure even after googling what this means
-	     		//my URL is accurate, I am not sure I am targeting data correctly.
+	     		
 	     		try{
 	     		//parsing through JSON Data   accepts a string as a parameter
 	     		JSONObject json = new JSONObject(result);
