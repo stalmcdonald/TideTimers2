@@ -12,7 +12,6 @@ import com.cm.tidetimers2.R;
 import com.cm.tidetimers2.WebFile;
 import com.cm.tidetimers2.DataFile;
 
-//import java.net.MalformedURLException;
 import java.net.URL;
 
 import java.util.HashMap;
@@ -31,9 +30,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,18 +67,60 @@ public class TideActivity extends Activity implements OnClickListener {
 	           tvWater = (TextView)findViewById(R.id.tvWater);
 	           
 	           //set a button for onclicklistener
-	           b.setOnClickListener(this);
-	           
+	           b.setOnClickListener(new OnClickListener() {
+	       		
+	        	 //gets text entered in edit text and appends to textview along with data pulled from json
+	        		@Override
+	        		public void onClick(View v) {
+	        			
+	        			// getting text edited and appending it to a string
+	        			String c = etCity.getText().toString();
+	        			String p = etCity.getText().toString();
+	        			String w = etCity.getText().toString();
+	        			StringBuilder URL = new StringBuilder(baseURL);
+	        			
+	        			URL.append(c + ".json");
+	        			
+	        			@SuppressWarnings("unused")
+	        			String fullUrl = URL.toString();
+	        			try{
+	        	    		//finalURL = new URL(baseURL + city + ".json");
+	        	    		//finalURL = new URL(baseURL);
+	        	    		Log.i("my url:", baseURL + c + ".json");
+	        	    		Log.i("City Entered:", c);
+	        	    		//LocRequest lr = new LocRequest();
+	        	    		tvCity.setText("In " + etCity + " The tide prediction: High");
+	        	    		tvPrediction.setText( p + " tide prediction:");
+	        	    		
+	        	    		//tvCity.setText(fullURL);
+	        	    		//lr.execute(fullUrl);
+	        	    		
+	        	    		//Log.e showing in LogCat, I am assuming it is because my key is bad again, not sure why since I regenerated the key.	
+	        	    	} finally //(MalformedURLException e){
+	        	    	{
+	        	    		Log.e("BAD URL", "MALFORMED URL");
+	        	    		tvCity.setText("error");
+	        	    		tvPrediction.setText( p + " Tide Prediction: UNKNOWN");
+	        	    		tvWater.setText(w + ": Puget Sound");
+	        	    		etCity.setText(URL);
+	        	    		//return "In " + etCity + " The tide prediction: High";
+	        	    		//URL = null;
+	        	    	}
+	        			
+	        	    }
+	           });
+	       			
+	       			
 	   }
 	   
  		
 	   //@Override
-   	public void onPostExecute(String result){
+   	public void execute(String result){
    		Log.d("URL RESPONSE",result);
    		//Still working on Parsing Data, decided to go back to AsyncTask 
    		
    		try{
-   		//parsing through JSON Data   accepts a string as a parameter
+   		//parsing through JSON Data accepts a string as a parameter
    		JSONObject json = new JSONObject(result);
    		JSONObject results = json.getJSONObject("tideInfo.tideSite");//.getJSONObject("tideSite");
    		if(results.getString("tideInfo").compareTo("type")==1){
@@ -100,54 +141,7 @@ public class TideActivity extends Activity implements OnClickListener {
    			Log.e("JSON", "JSON OBJECT EXCEPTION " + e.toString());
    		}
    	}
-   	
-   	//gets text entered in edit text and appends to textview along with data pulled from json
-	@Override
-	public void onClick(View v) {
-		
-		// getting text edited and appending it to a string
-		String c = etCity.getText().toString();
-		String p = etCity.getText().toString();
-		String w = etCity.getText().toString();
-		StringBuilder URL = new StringBuilder(baseURL);
-		
-		URL.append(c + ".json");
-		
-		String fullUrl = URL.toString();
-		try{
-    		//finalURL = new URL(baseURL + city + ".json");
-    		//finalURL = new URL(baseURL);
-    		Log.i("my url:", baseURL + c + ".json");
-    		//LocRequest lr = new LocRequest();
-    		tvCity.setText("In " + etCity + " The tide prediction: High");
-    		tvPrediction.setText( p + " tide prediction:");
-    		
-    		//tvCity.setText(fullURL);
-    		//lr.execute(fullUrl);
-    		
-    		//Log.e showing in LogCat, I am assuming it is because my key is bad again, not sure why since I regenerated the key.	
-    	} finally //(MalformedURLException e){
-    	{
-    		Log.e("BAD URL", "MALFORMED URL");
-    		tvCity.setText("error");
-    		tvPrediction.setText( p + " Tide Prediction: UNKNOWN");
-    		tvWater.setText(w + ": Puget Sound");
-    		etCity.setText(URL);
-    		//return "In " + etCity + " The tide prediction: High";
-    		//URL = null;
-    	}
-		
-    }
-	
-//	public void onClick1(View vi){
-//
-//	
-//	//Detects the network connection
-//	_connected = WebFile.getConnectionStatus(_context);
-//	if(_connected){
-//		Log.i("NETWORK CONNECTION ", WebFile.getConnnectionType(_context));
-//	}
-//	}
+   		
 	
 	public String dataToString(){
 		return "In " + etCity + " The tide prediction: High";
@@ -168,7 +162,8 @@ public class TideActivity extends Activity implements OnClickListener {
     	return history;
     }
     
-    private class LocRequest extends AsyncTask<URL,Void,String>{
+    @SuppressWarnings("unused")
+	private class LocRequest extends AsyncTask<URL,Void,String>{
     	//override 2 separate functions
     	@Override
     	protected String doInBackground(URL...urls){
@@ -192,6 +187,17 @@ public class TideActivity extends Activity implements OnClickListener {
         
         view = view.findViewWithTag(R.id.class);
     }
+
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		//Detects the network connection
+  		_connected = WebFile.getConnectionStatus(_context);
+  		if(_connected){
+  			Log.i("NETWORK CONNECTION ", WebFile.getConnnectionType(_context));
+  		}
+	}
 	
   
 }//end activity

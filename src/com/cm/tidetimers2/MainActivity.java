@@ -64,7 +64,8 @@ public class MainActivity extends Activity {
 	 //JSON Path Example: http://api.wunderground.com/api/d4509f6df6f598a0/tide/q/Seattle.json
 
 	   //Create my custom API URL
-	     private void getfaveWatLoc(String city){
+	     @SuppressWarnings("unused")
+		private void getfaveWatLoc(String city){
 	     	Log.i("CLICK",city);
 	     	//JSON output.  tide by city.
 	     	String baseURL = "http://api.wunderground.com/api/3e64fa36c4f09bdd/tide/q/ "+ city +".json";
@@ -84,7 +85,7 @@ public class MainActivity extends Activity {
 	     }
 	     
 	   //create method to get history from Hard drive
-	     @SuppressWarnings("unchecked")
+	     @SuppressWarnings({ "unchecked", "unused" })
 	 	private HashMap<String, String> getHistory(){
 	     	Object stored = DataFile.readObjectFile(_context, "history", false);
 	     	
