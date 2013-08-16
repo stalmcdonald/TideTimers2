@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="1" >
+    android:weightSum="1"
+    android:background="#0181B2" >
 	
 	<TextView 
 	    android:text="City:" 
@@ -25,11 +26,19 @@
 	    android:id="@+id/bPrediction" 
 	    android:text="Predict"
 		android:layout_height="wrap_content" 
-		android:layout_width="match_parent">
+		android:layout_width="match_parent"
+		android:background="#FFF">
 	</Button>
 	
 	<TextView android:text="Current Tidal Prediction" 
 	    android:id="@+id/tvPrediction"
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content">
+	</TextView>
+	
+	<TextView android:text="Body of Water" 
+	    android:id="@+id/tvWater"
 		android:textAppearance="?android:attr/textAppearanceLarge"
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content">
