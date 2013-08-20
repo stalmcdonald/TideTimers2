@@ -99,7 +99,7 @@ public class TideActivity extends Activity implements OnClickListener {
 	        	    	} finally //(MalformedURLException e){
 	        	    	{
 	        	    		Log.e("BAD URL", "MALFORMED URL");
-	        	    		tvCity.setText("error");
+	        	    		tvCity.setText("Can not provide information at this time");
 	        	    		tvPrediction.setText( p + " Tide Prediction: UNKNOWN");
 	        	    		tvWater.setText(w + ": Puget Sound");
 	        	    		etCity.setText(URL);

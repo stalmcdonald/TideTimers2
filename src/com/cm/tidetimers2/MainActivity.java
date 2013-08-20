@@ -68,7 +68,7 @@ public class MainActivity extends Activity {
 		private void getfaveWatLoc(String city){
 	     	Log.i("CLICK",city);
 	     	//JSON output.  tide by city.
-	     	String baseURL = "http://api.wunderground.com/api/3e64fa36c4f09bdd/tide/q/ "+ city +".json";
+	     	String baseURL = " http://api.wunderground.com/api/3e64fa36c4f09bdd/tide/q/FL/"+ city +".json";
 	     			
 	     	URL finalURL;
 	     	try{
